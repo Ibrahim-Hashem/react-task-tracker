@@ -4,6 +4,7 @@ import {useState} from 'react'
 import AddTask from './components/AddTask'
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false)
   const [tasks,setTasks]= useState([
     {
         id: 1,
@@ -44,8 +45,8 @@ const addTask = (task) => {
 
   return (
     <div className="container">
-      <Header title='Task Tracker'/>
-      <AddTask onAdd={addTask}/>
+      <Header title='Task Tracker' onAdd = {()=>setShowAddTask(!showAddTask)} showAdd= {showAddTask} />
+      {showAddTask && <AddTask onAdd={addTask}/>}
       {tasks.length >0 ? <Tasks tasks = {tasks} onToggle = {toggleReminder} onDelete={deleteTask}/> : "No tasks"}
     </div>
   );
